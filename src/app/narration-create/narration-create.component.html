@@ -1,0 +1,56 @@
+<h3>Create a Narration</h3>
+<form #narrationCreateForm="ngForm">
+  <div class="form-row">
+    <div class="col">
+      <div class="form-group">
+        <label for="narration-name">Name</label>
+        <input [(ngModel)]="model.name" type="text" class="form-control" id="narration-name" name="narration-name">
+      </div>
+    </div>
+  </div>
+  <h4>Sections</h4>
+  <form *ngFor="let section of model.sections">
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <label for="narration-section-{{index}}-name">Name</label>
+          <input [(ngModel)]="section.name" type="text" class="form-control" id="narration-section-{{index}}-name" name="narration-section-name">
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="narration-section-{{index}}-duration">Duration</label>
+          <select [(ngModel)]="section.duration" class="form-control" id="narration-section-{{index}}-duration" name="narration-section-duration">
+            <option value="1">1 min</option>
+            <option value="3">3 mins</option>
+            <option value="5">5 mins</option>
+            <option value="10">10 mins</option>
+            <option value="15">15 mins</option>
+            <option value="20">20 mins</option>
+            <option value="25">25 mins</option>
+            <option value="30">30 mins</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <label for="narration-section-{{index}}-content">Content</label>
+          <textarea [(ngModel)]="section.content" class="form-control" id="narration-section-{{index}}-content" rows="10" name="narration-section-content"></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="form-row">
+    <div class="col">
+      <button (click)="createNewSection()" type="button" class="btn btn-outline-dark btn-lg btn-block">New Section</button>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      <button type="submit" class="btn btn-lg btn-dark" style="margin-top: 15px;">Create</button>
+    </div>
+  </div>
+</form>
+<!-- <p class="small">{{debug()}}</p> -->

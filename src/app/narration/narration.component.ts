@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
+import { trigger, state, style, animate, transition } from '@angular/animations';
+
 import { Narration, Section } from '../model/narration-model';
 import { NarrationService } from '../narration.service';
 
@@ -10,6 +12,18 @@ import { NarrationService } from '../narration.service';
   styleUrls: ['./narration.component.css'],
   providers: [
     NarrationService
+  ],
+  animations: [
+    trigger('activeState', [
+      state('active', style({
+        opacity: '1'
+      })),
+      state('inactive', style({
+        opacity: '0.25'
+      })),
+      transition('inactive => active', animate('2000ms ease-in')),
+      transition('active => inactive', animate('2000ms ease-out'))
+    ])
   ]
 })
 export class NarrationComponent implements OnInit {
@@ -33,12 +47,8 @@ export class NarrationComponent implements OnInit {
     });
   }
 
-  begin() {
-    console.log('beginning narration', this.narration.name);
-  }
+  begin() { this.narration.sections[0].activeState = 'active' }
 
-  pause() {
-    console.log('pausing narration', this.narration.name);
-  }
+  pause() { }
 
 }

@@ -10,7 +10,7 @@
   </div>
 </div>
 <div *ngFor="let section of narration.sections" class="row narration-section">
-  <div class="col">
+  <div [@activeState]="section.activeState" class="col">
     <h2>{{section.name}}</h2>
     <p>{{section.content}}</p>
   </div>

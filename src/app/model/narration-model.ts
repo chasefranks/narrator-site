@@ -18,6 +18,7 @@ class Section {
   content: string;
   duration: number;
   remaining: number;
+  activeState: string = 'inactive';
 }
 
 export {Narration, Section};

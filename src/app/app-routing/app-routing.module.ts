@@ -3,11 +3,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { NarrationCreateComponent } from '../narration-create/narration-create.component';
+import { NarrationComponent } from '../narration/narration.component';
 
 const routes: Routes = [
   {
     path: 'narration/create',
     component: NarrationCreateComponent
+  },
+  {
+    path: 'narration/:id',
+    component: NarrationComponent
   }
 ];
 

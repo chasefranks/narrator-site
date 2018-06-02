@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 
 import { AppComponent } from './app.component';
 import { NarrationCreateComponent } from './narration-create/narration-create.component';
+import { NarrationComponent } from './narration/narration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NarrationCreateComponent
+    NarrationCreateComponent,
+    NarrationComponent
   ],
   imports: [
     BrowserModule,

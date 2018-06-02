@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-8">
+    <h1>{{narration.name}}</h1>
+  </div>
+  <div class="col-md-2">
+    <button (click)="begin()" type="button" class="btn btn-dark">Begin</button>
+  </div>
+  <div class="col-md-2">
+    <button (click)="pause()" type="button" class="btn btn-dark">Pause</button>
+  </div>
+</div>
+<div *ngFor="let section of narration.sections" class="row narration-section">
+  <div class="col">
+    <h2>{{section.name}}</h2>
+    <p>{{section.content}}</p>
+  </div>
+</div>

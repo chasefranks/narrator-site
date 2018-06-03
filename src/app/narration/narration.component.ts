@@ -3,7 +3,10 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
+import { Observable, Subject } from 'rxjs';
+
 import { Narration, Section } from '../model/narration-model';
+import { NarrationBegin, NarrationPause } from '../model/narration-events';
 import { NarrationService } from '../narration.service';
 
 @Component({
@@ -31,10 +34,16 @@ export class NarrationComponent implements OnInit {
   private narrationId: string;
   private narration: Narration;
 
+  // event emitters for narration events
+  $begin: Subject<NarrationBegin> = new Subject();
+  $pause: Subject<NarrationPause> = new Subject();
+
   constructor(
     private route: ActivatedRoute,
     private service: NarrationService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -43,12 +52,35 @@ export class NarrationComponent implements OnInit {
       this.service.getNarrationById(this.narrationId)
         .subscribe(narration => {
           this.narration = narration;
+
+          // bind event handlers
+          this.$begin.subscribe(event => this._begin(event));
+          this.$pause.subscribe(event => this._pause(event));
         })
     });
+
   }
 
-  begin() { this.narration.sections[0].activeState = 'active' }
+  beginNarration() {
+    console.log('begin clicked');
+    console.log('narration', this.narration );
+    console.log(this.$begin.closed);
+    this.$begin.next(new NarrationBegin());
+  }
 
-  pause() { }
+  _begin(event: NarrationBegin) {
+    console.log('narration begin event received');
+    console.log(event);
+    // set active state
+    this.narration.sections[0].activeState = 'active';
+  }
+
+  pauseNarration() {
+    this.$pause.next(new NarrationPause());
+  }
+
+  _pause(event: NarrationPause) {
+    console.log('pause event received');
+  }
 
 }

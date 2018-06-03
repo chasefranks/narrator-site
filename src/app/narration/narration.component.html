@@ -3,10 +3,10 @@
     <h1>{{narration.name}}</h1>
   </div>
   <div class="col-md-2">
-    <button (click)="begin()" type="button" class="btn btn-dark">Begin</button>
+    <button (click)="beginNarration()" type="button" class="btn btn-dark">Begin</button>
   </div>
   <div class="col-md-2">
-    <button (click)="pause()" type="button" class="btn btn-dark">Pause</button>
+    <button (click)="pauseNarration()" type="button" class="btn btn-dark">Pause</button>
   </div>
 </div>
 <div *ngFor="let section of narration.sections" class="row narration-section">

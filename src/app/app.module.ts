@@ -9,12 +9,16 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { NarrationCreateComponent } from './narration-create/narration-create.component';
 import { NarrationComponent } from './narration/narration.component';
+import { NarrationListComponent } from './narration-list/narration-list.component';
+
+import { NarrationService } from './narration.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NarrationCreateComponent,
-    NarrationComponent
+    NarrationComponent,
+    NarrationListComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +26,9 @@ import { NarrationComponent } from './narration/narration.component';
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    NarrationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

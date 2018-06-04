@@ -11,7 +11,10 @@
 </div>
 <div *ngFor="let section of narration.sections" class="row narration-section">
   <div [@activeState]="section.activeState" class="col">
-    <h2>{{section.name}}</h2>
+    <h2>
+      {{section.name}}
+      <small class="text-muted">duration: {{section.duration}} mins</small>
+    </h2>    
     <p>{{section.content}}</p>
   </div>
 </div>

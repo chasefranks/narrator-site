@@ -13,10 +13,17 @@ export class NarrationService {
 
   constructor() {
     // stub this service with some mock data for testing
+    console.log('constructing narration service')
     this.narrations = mockNarrations;
   }
 
+  getNarrations(): Observable<Narration[]> {
+    console.log('returning observable with', this.narrations);
+    return Observable.of(this.narrations);
+  }
+
   addNarration(narration: Narration) {
+    console.log('adding narration', narration)
     this.narrations.push(narration);
   }
 

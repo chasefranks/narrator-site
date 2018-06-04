@@ -10,6 +10,10 @@ class Narration {
     this.sections.push(section);
   }
 
+  getSection(id: number): Section {
+    return this.sections.find(s => s.id === id);
+  }
+
 }
 
 class Section {

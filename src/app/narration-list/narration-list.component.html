@@ -1,0 +1,14 @@
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Narration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let narration of narrations">
+      <th scope="row">{{narration.id}}</th>
+      <td><a routerLink="/narration/{{narration.id}}">{{narration.name}}</a></td>
+    </tr>
+  </tbody>
+</table>

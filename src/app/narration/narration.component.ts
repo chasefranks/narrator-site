@@ -50,9 +50,7 @@ export class NarrationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: NarrationService
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

@@ -23,4 +23,10 @@ export class NarrationListComponent implements OnInit {
     })
   }
 
+  getTotalDuration(narration: Narration): Number {
+      let totalDuration = 0;
+      narration.sections.forEach(s => { totalDuration += s.duration });
+      return totalDuration;
+  }
+
 }

@@ -1,35 +1,32 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 import { Narration, Section } from './model/narration-model';
-import { mockNarrations } from './model/mock-narrations';
 
 @Injectable()
-export class NarrationService {
+export class NarrationService implements OnInit {
 
-  private narrations: Narration[];
+    constructor(private httpClient: HttpClient) {
 
-  constructor() {
-    // stub this service with some mock data for testing
-    console.log('constructing narration service')
-    this.narrations = mockNarrations;
-  }
+    }
 
-  getNarrations(): Observable<Narration[]> {
-    console.log('returning observable with', this.narrations);
-    return Observable.of(this.narrations);
-  }
+    ngOnInit() {
 
-  addNarration(narration: Narration) {
-    console.log('adding narration', narration)
-    this.narrations.push(narration);
-  }
+    }
 
-  getNarrationById(id: String): Observable<Narration> {
-    return Observable.from(this.narrations)
-      .pipe( filter( n => n.id === id ), take(1) );
-  }
+    getNarrations(): Observable<Narration[]> {
+        return this.httpClient.get<Narration[]>('/narrations');
+    }
+
+    createNarration(narration: Narration) {
+        return this.httpClient.post('/narrations', narration);
+    }
+
+    getNarrationById(id: String): Observable<Narration> {
+        return this.httpClient.get<Narration>(`/narrations/${id}`);
+    }
 
 }

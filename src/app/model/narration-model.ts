@@ -1,28 +1,40 @@
-/** define our narration data model */
-class Narration {
-  id: string;
-  name: string;
-  sections: Section[] = [];
-  permalink: string;
+export class Narration {
 
-  addSection(section: Section) {
-    section.id = this.sections.length;
-    this.sections.push(section);
-  }
+    public id: string;
 
-  getSection(id: number): Section {
-    return this.sections.find(s => s.id === id);
-  }
+    constructor(
+        public name: string,
+        public permalink?: string,
+        public sections: Section[] = []
+    ) { }
+
+    addSection(section: Section) {
+        if (!this.sections) {
+            this.sections = [];
+        }
+        section.id = this.sections.length;
+        this.sections.push(section);
+    }
+
+    getSection(id: number): Section {
+        if (!this.sections) {
+            return null;
+        }
+        return this.sections.find(s => s.id === id);
+    }
 
 }
 
-class Section {
-  id: number;
-  name: string;
-  content: string;
-  duration: number;
-  remaining: number;
-  activeState: string = 'inactive';
-}
+export class Section {
 
-export {Narration, Section};
+    public id;
+
+    constructor(
+        public name: string,
+        public content: string,
+        public duration: number,
+        public remaining: number = duration,
+        public activeState: string = 'inactive'
+    ) { }
+
+}

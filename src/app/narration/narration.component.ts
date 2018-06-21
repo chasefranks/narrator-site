@@ -58,6 +58,7 @@ export class NarrationComponent implements OnInit {
       // todo instead of nesting, use map
       this.service.getNarrationById(this.narrationId)
         .subscribe(narration => {
+          console.log(typeof narration);
           this.narration = narration;
 
           // bind event handlers

@@ -1,4 +1,4 @@
-<table class="table table-dark">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th scope="col">Narration</th>
@@ -6,8 +6,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let narration of narrations">
-            <td><a routerLink="/narration/{{narration.id}}">{{narration.name}}</a></td>
+        <tr *ngFor="let narration of narrations" (click)="goToNarration(narration.id)">
+            <td>{{narration.name}}</td>
             <td>{{ getTotalDuration(narration) }}</td>
         </tr>
     </tbody>

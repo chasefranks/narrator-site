@@ -9,12 +9,14 @@
     <button (click)="pauseNarration()" type="button" class="btn btn-dark">Pause</button>
   </div>
 </div>
-<div *ngFor="let section of narration.sections" class="row narration-section">
-  <div [@activeState]="section.activeState" class="col">
-    <h2>
-      {{section.name}}
-      <small class="text-muted">duration: {{section.duration}} mins</small>
-    </h2>
-    <p>{{section.content}}</p>
+<div *ngIf="narration">
+  <div *ngFor="let section of narration.sections" class="row narration-section">
+    <div [@activeState]="section.activeState" class="col">
+      <h2>
+        {{section.name}}
+        <small class="text-muted">duration: {{section.duration}} mins</small>
+      </h2>
+      <p>{{section.content}}</p>
+    </div>
   </div>
 </div>

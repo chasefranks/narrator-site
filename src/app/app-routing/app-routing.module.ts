@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NarrationCreateComponent } from '../narration-create/narration-create.component';
 import { NarrationComponent } from '../narration/narration.component';
 import { NarrationListComponent } from '../narration-list/narration-list.component';
+import { AppComponent } from '../app.component';
 
 const routes: Routes = [
   {
@@ -18,10 +19,6 @@ const routes: Routes = [
   {
     path: 'narration/:id',
     component: NarrationComponent
-  },
-  {
-    path: '',
-    component: NarrationListComponent
   }
 ];
 

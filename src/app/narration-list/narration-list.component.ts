@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NarrationService } from '../narration.service';
 import { Narration } from '../model/narration-model';
@@ -13,7 +14,8 @@ export class NarrationListComponent implements OnInit {
   narrations: Narration[];
 
   constructor(
-    private service: NarrationService
+    private service: NarrationService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,10 @@ export class NarrationListComponent implements OnInit {
       let totalDuration = 0;
       narration.sections.forEach(s => { totalDuration += s.duration });
       return totalDuration;
+  }
+
+  goToNarration(id: String) {
+    this.router.navigateByUrl(`/narration/${id}`);
   }
 
 }

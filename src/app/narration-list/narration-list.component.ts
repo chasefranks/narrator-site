@@ -13,6 +13,8 @@ export class NarrationListComponent implements OnInit {
 
   narrations: Narration[];
 
+  showDeleteSuccess: boolean = false;
+
   constructor(
     private service: NarrationService,
     private router: Router
@@ -33,6 +35,19 @@ export class NarrationListComponent implements OnInit {
 
   goToNarration(id: String) {
     this.router.navigateByUrl(`/narration/${id}`);
+  }
+
+  deleteNarration(id: String) {
+    this.service.deleteNarration(id)
+      .subscribe(any => {
+        console.log(any);
+        this.showDeleteSuccess = true;
+        this.narrations = this.narrations.filter(n => n.id != id);
+      });
+  }
+
+  closeDeleteSuccess() {
+    this.showDeleteSuccess = false;
   }
 
 }

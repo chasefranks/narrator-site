@@ -43,4 +43,8 @@ export class NarrationService implements OnInit {
           );
     }
 
+    deleteNarration(id: String): Observable<any> {
+      return this.httpClient.delete(`/narrations/${id}`);
+    }
+
 }

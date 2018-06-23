@@ -1,4 +1,6 @@
 pipeline {
+  // agents will be defined at the stage level
+  agent none
   stages {
     stage('Build') {
       agent {
@@ -14,7 +16,10 @@ pipeline {
     stage('Deploy') {
       agent any
       steps {
-        zip dir: 'dist', zipFile: 'site.zip'
+        zip {
+          dir: 'dist',
+          zipFile: 'site.zip'
+        }
       }
     }
   }

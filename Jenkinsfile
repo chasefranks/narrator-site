@@ -2,7 +2,6 @@ pipeline {
   agent {
     docker {
       image 'node:6-alpine'
-      args '-v /root/.npm:/root/.npm'
     }
   }
   stages {
@@ -10,6 +9,11 @@ pipeline {
       steps {
         sh 'npm install'
         sh 'npm run build'
+      }
+    }
+    stage('Zip') {
+      steps {
+        zip archive: true, dir: 'dist', zipFile: 'site.zip'
       }
     }
   }

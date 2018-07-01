@@ -1,24 +1,29 @@
 pipeline {
-  // agents will be defined at the stage level
-  agent none
+
+  agent any
+
   stages {
-    stage('Build') {
+    stage('build') {
       agent {
         docker {
-          image 'node:6-alpine'
+          image 'node:8-alpine'
+          reuseNode true
         }
       }
       steps {
         sh 'npm install'
         sh 'npm run build'
+        sh 'rm site.zip'
+        zip archive: true, dir: 'dist', glob: '', zipFile: 'site.zip'
       }
     }
-    stage('Deploy') {
-      agent any
+    stage('deploy') {
       steps {
-        zip {
-          dir: 'dist',
-          zipFile: 'site.zip'
+        echo 'deploying to nginx...'
+
+        withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-ci', keyFileVariable: 'SSH_ID')]) {
+          sh "scp -i ${SSH_ID} site.zip jenkins@nginx:~/site.zip"
+          sh "ssh -i ${SSH_ID} jenkins@nginx unzip ~/site.zip -d /sites/narrator" 
         }
       }
     }

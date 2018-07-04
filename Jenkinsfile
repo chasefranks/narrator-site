@@ -22,7 +22,7 @@ pipeline {
 
         withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-ci', keyFileVariable: 'SSH_ID')]) {
           sh "scp -i ${SSH_ID} site.zip jenkins@nginx:~/site.zip"
-          sh "ssh -i ${SSH_ID} jenkins@nginx unzip /home/jenkins/site.zip -d /sites/narrator"
+          sh "ssh -i ${SSH_ID} jenkins@nginx unzip -o /home/jenkins/site.zip -d /sites/narrator"
         }
       }
     }

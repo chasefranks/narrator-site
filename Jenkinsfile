@@ -12,7 +12,7 @@ pipeline {
       }
       steps {
         sh 'npm install'
-        sh 'npm run build'
+        sh 'npm run build-dev'
         zip archive: true, dir: 'dist', glob: '', zipFile: 'site.zip'
       }
     }

@@ -9,13 +9,9 @@ import { Narration, Section } from './model/narration-model';
 @Injectable()
 export class NarrationService implements OnInit {
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient) {}
 
-    }
-
-    ngOnInit() {
-
-    }
+    ngOnInit() {}
 
     getNarrations(): Observable<Narration[]> {
         return this.httpClient.get<Narration[]>('/narrations');
@@ -41,6 +37,13 @@ export class NarrationService implements OnInit {
               return narration;
             })
           );
+    }
+
+    /**
+     * updates a narration by PUTting at /narrations/:id    
+     */
+    updateNarration(id: String, narration: Narration): Observable<any> {
+        return this.httpClient.put(`narrations/${id}`, narration);
     }
 
     deleteNarration(id: String): Observable<any> {

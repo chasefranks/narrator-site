@@ -37,8 +37,8 @@ import { NarrationService } from '../narration.service';
 })
 export class NarrationComponent implements OnInit {
 
-  private narrationId: string;
   private narration: Narration;
+  private lastSectionStarted: Date;
 
   // event emitters for narration events
   $begin: Subject<NarrationBegin> = new Subject();
@@ -53,10 +53,10 @@ export class NarrationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.route.paramMap.subscribe(params => {
-      this.narrationId = params.get('id');
-      // todo instead of nesting, use map
-      this.service.getNarrationById(this.narrationId)
+
+      this.service.getNarrationById(params.get('id'))
         .subscribe(narration => {
           console.log(typeof narration);
           this.narration = narration;
@@ -71,6 +71,13 @@ export class NarrationComponent implements OnInit {
         })
     });
 
+  }
+
+  updateNarration() {
+    this.service.updateNarration(this.narration.id, this.narration)
+        .subscribe(updated => {
+            console.log('narration updated', updated);
+        });
   }
 
   beginNarration() {
@@ -92,6 +99,7 @@ export class NarrationComponent implements OnInit {
   _beginSection(event: SectionBegin) {
     let section: Section = this.narration.getSection(event.sectionId);
     section.activeState = 'active';
+    this.lastSectionStarted = new Date();
 
     // set timer to fire section finish event when time remaining expires
     setTimeout(() => {
@@ -105,6 +113,9 @@ export class NarrationComponent implements OnInit {
     let section: Section = this.narration.getSection(event.sectionId);
     section.activeState = 'inactive';
     section.remaining = 0;
+
+    // update section
+    this.updateNarration();
 
     // handoff to next section
     let nextSectionId = section.id + 1;

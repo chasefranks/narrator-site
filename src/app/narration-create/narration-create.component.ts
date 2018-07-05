@@ -19,7 +19,7 @@ export class NarrationCreateComponent implements OnInit {
         this.service = narrationService;
         this.router = router;
         this.model = new Narration('new narration');
-        this.model.addSection(new Section('new section', 'some content', 5));
+        this.model.addSection(new Section('', '', undefined));
     }
 
     ngOnInit() {
@@ -30,10 +30,15 @@ export class NarrationCreateComponent implements OnInit {
     }
 
     createNarration() {
+
+        // set time remaining to duration
+        this.model.sections.forEach(s => {s.remaining = s.duration});
+
         this.service.createNarration(this.model)
             .subscribe(created => {
                 this.router.navigateByUrl('/narration/list');
-            });        
+            });
+            
     }
 
     debug(): string {

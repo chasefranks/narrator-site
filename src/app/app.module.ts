@@ -13,6 +13,7 @@ import { NarrationComponent } from './narration/narration.component';
 import { NarrationListComponent } from './narration-list/narration-list.component';
 
 import { NarrationService } from './narration.service';
+import { LogService } from './log.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NarrationService } from './narration.service';
     AppRoutingModule
   ],
   providers: [
-    NarrationService
+    NarrationService,
+    LogService
   ],
   bootstrap: [AppComponent]
 })

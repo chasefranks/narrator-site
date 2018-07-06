@@ -8,6 +8,12 @@ export class NarrationBegin { }
  */
 export class NarrationPause { }
 
+
+/**
+ * emitted on resuming from a pause
+ */
+export class NarrationResume { }
+
 export class SectionBegin {
   constructor( public sectionId: number ) { }
 }

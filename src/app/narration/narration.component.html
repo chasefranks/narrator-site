@@ -1,12 +1,14 @@
 <div *ngIf="narration" class="row">
   <div class="col-md-8">
+    <div *ngIf="paused" class="alert alert-success">Narration paused</div>
     <h1>{{narration.name}}</h1>
   </div>
   <div class="col-md-2">
     <button (click)="beginNarration()" type="button" class="btn btn-dark">Begin</button>
   </div>
   <div class="col-md-2">
-    <button (click)="pauseNarration()" type="button" class="btn btn-dark">Pause</button>
+    <button *ngIf="!paused" (click)="pauseNarration()" type="button" class="btn btn-dark">Pause</button>
+    <button *ngIf="paused" (click)="resumeNarration()" type="button" class="btn btn-dark">Resume</button>
   </div>
 </div>
 <div *ngIf="narration">
@@ -14,8 +16,8 @@
     <div [@activeState]="section.activeState" class="col">
       <h2>
         {{section.name}}
-        <small class="text-muted">duration: {{section.duration}} mins</small>
       </h2>
+      <p><small class="text-muted">duration: {{section.duration}} mins</small></p>
       <p>{{section.content}}</p>
     </div>
   </div>

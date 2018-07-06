@@ -1,11 +1,13 @@
-<nav class="nav nav-pills">
-  <a routerLink="/narration/create" class="nav-link">Create</a>
-  <a routerLink="/narration/list" class="nav-link">Narrations</a>
+<nav>
+    <a id="logo">Narrator</a>
+    <a routerLink="/narration/create">Create</a>
+    <a routerLink="/narration/list">Narrations</a>
 </nav>
 <div class="container main-app-container">
-  <div class="row">
-    <div class="col-md-10">
-      <router-outlet></router-outlet>
+    <div class="row">
+        <div class="col-md-10">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-  </div>
 </div>
+<footer>&copy; 2018 drive2code</footer>

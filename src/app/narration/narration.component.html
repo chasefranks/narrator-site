@@ -4,11 +4,11 @@
     <h1>{{narration.name}}</h1>
   </div>
   <div class="col-md-2">
-    <button (click)="beginNarration()" type="button" class="btn btn-dark">Begin</button>
+    <button (click)="beginNarration()" type="button" class="button">Begin</button>
   </div>
   <div class="col-md-2">
-    <button *ngIf="!paused" (click)="pauseNarration()" type="button" class="btn btn-dark">Pause</button>
-    <button *ngIf="paused" (click)="resumeNarration()" type="button" class="btn btn-dark">Resume</button>
+    <button *ngIf="!paused" (click)="pauseNarration()" type="button" class="button">Pause</button>
+    <button *ngIf="paused" (click)="resumeNarration()" type="button" class="button">Resume</button>
   </div>
 </div>
 <div *ngIf="narration">

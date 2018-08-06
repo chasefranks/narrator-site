@@ -38,7 +38,27 @@ export class NarrationCreateComponent implements OnInit {
             .subscribe(created => {
                 this.router.navigateByUrl('/narration/list');
             });
-            
+
+    }
+
+    handleDrop(dropEvent: DragEvent) {
+        // handle drop event here
+        dropEvent.preventDefault();
+
+        if(dropEvent.dataTransfer.files.length > 0) {
+            this.service.createNarrationFromMarkdown(dropEvent.dataTransfer.files[0])
+                .subscribe((created: Narration) => {
+                    this.router.navigateByUrl('/narration/list');
+                });
+        } else {
+            console.log('error, no files selected for upload!');
+        }
+    }
+
+    handleDragover(dragOverEvent: any) {
+        // this needs to be here to prevent file from opening
+        // which is the default browser behavior
+        dragOverEvent.preventDefault();
     }
 
     debug(): string {

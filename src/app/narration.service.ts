@@ -1,8 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { filter, take, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, take, map, flatMap } from 'rxjs/operators';
 
 import { Narration, Section } from './model/narration-model';
 
@@ -22,24 +22,24 @@ export class NarrationService implements OnInit {
     }
 
     createNarrationFromMarkdown(file: File): Observable<Narration> {
-        // set mimetype to text/markdown
-        let headers: HttpHeaders = new HttpHeaders({"Content-Type": 'text/markdown; charset=utf-8'});
 
-        console.log(headers);
+        const $content = new Observable((observer) => {
 
-        // get content from file
-        let reader: FileReader = new FileReader();
+            const reader: FileReader = new FileReader();
 
+            reader.onload = (ev: any) => {
+                observer.next(reader.result);
+                observer.complete();
+            }
+            reader.readAsText(file);
 
-        reader.onload = (ev: any) => {
-            console.log(reader.result);
-        }
-
-        reader.readAsText(file);
-
-        return this.httpClient.post<Narration>('/narrations', reader.result, {
-            headers: headers
         });
+
+        let headers: HttpHeaders = new HttpHeaders({"Content-Type": "text/markdown; charset=utf-8"});
+
+        return $content.pipe(
+            flatMap(content => this.httpClient.post<Narration>('/narrations', content, { headers: headers}))
+        );
 
     }
 

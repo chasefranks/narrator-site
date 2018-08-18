@@ -1,0 +1,10 @@
+#splash-div {
+    background-image: url("/assets/mics.png");
+    background-attachment: fixed;
+    background-size: auto;
+    background-repeat: repeat-x;
+    width: 101%;
+    height: 100vh;
+    position: relative;
+    left: -15px;
+}

@@ -14,13 +14,15 @@ import { NarrationListComponent } from './narration-list/narration-list.componen
 
 import { NarrationService } from './narration.service';
 import { LogService } from './log.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NarrationCreateComponent,
     NarrationComponent,
-    NarrationListComponent
+    NarrationListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

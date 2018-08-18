@@ -6,6 +6,7 @@ import { NarrationCreateComponent } from '../narration-create/narration-create.c
 import { NarrationComponent } from '../narration/narration.component';
 import { NarrationListComponent } from '../narration-list/narration-list.component';
 import { AppComponent } from '../app.component';
+import { HomeComponent } from "../home/home.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'narration/:id',
     component: NarrationComponent
+  },
+  {
+      path: '',
+      component: HomeComponent
   }
 ];
 

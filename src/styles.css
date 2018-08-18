@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
     position: relative;
-    padding-bottom: 100px;
     min-height: 100vh;
     margin: 0;
 }
@@ -42,11 +41,6 @@ nav a:hover {
 
 #logo:hover {
     border-bottom: none;
-}
-
-.main-app-container {
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 
 input[type="text"]:focus,

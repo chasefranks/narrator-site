@@ -1,6 +1,18 @@
+.upload-area-background {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
 #markdown-upload-area {
-    height: 80px;
+    height: 100px;
     width: auto;
-    border: dashed black 1px;
+    border: dashed grey 1.5px;
     border-radius: 5px;
+    text-align: center;
+}
+
+#markdown-upload-area i {
+    color: #3b3a30;
+    vertical-align: middle;
+    line-height: 1.6;
 }

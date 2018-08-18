@@ -14,6 +14,7 @@ export class NarrationCreateComponent implements OnInit {
     model: Narration;
     service: NarrationService;
     router: Router;
+    createError: string;
 
     constructor(narrationService: NarrationService, router: Router) {
         this.service = narrationService;
@@ -48,8 +49,12 @@ export class NarrationCreateComponent implements OnInit {
         if(dropEvent.dataTransfer.files.length > 0) {
             this.service.createNarrationFromMarkdown(dropEvent.dataTransfer.files[0])
                 .subscribe((created: Narration) => {
-                    this.router.navigateByUrl('/narration/list');
-                });
+                        this.router.navigateByUrl('/narration/list');
+                    },
+                    (error: Error) => {
+                        this.createError = error.message;
+                    }
+                );
         } else {
             console.log('error, no files selected for upload!');
         }

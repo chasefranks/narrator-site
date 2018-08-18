@@ -60,6 +60,9 @@
         </div>
         <div class="col-md-6">
             <h3>...or upload from markdown</h3>
+            <div *ngIf="createError" class="alert alert-danger" role="alert">
+              Error creating narration: {{createError}}
+            </div>
             <div class="upload-area-background">
                 <div class="upload-area" id="markdown-upload-area" (drop)="handleDrop($event)" (dragover)="handleDragover($event)">
                     <i class="fas fa-upload fa-3x"></i>

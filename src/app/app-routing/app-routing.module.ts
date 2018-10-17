@@ -9,35 +9,35 @@ import { AppComponent } from '../app.component';
 import { HomeComponent } from "../home/home.component";
 
 const routes: Routes = [
-  {
-    path: 'narration/create',
-    component: NarrationCreateComponent
-  },
-  {
-    path: 'narration/list',
-    component: NarrationListComponent
-  },
-  {
-    path: 'narration/:id',
-    component: NarrationComponent
-  },
-  {
-      path: '',
-      component: HomeComponent
-  }
+    {
+        path: 'narration/create',
+        component: NarrationCreateComponent
+    },
+    {
+        path: 'narration/list',
+        component: NarrationListComponent
+    },
+    {
+        path: 'narration/:id',
+        component: NarrationComponent
+    },
+    {
+        path: '',
+        component: HomeComponent
+    }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(
-      routes,
-      { enableTracing: false }
-    )
-  ],
-  exports: [
-    RouterModule
-  ],
-  declarations: []
+    imports: [
+        CommonModule,
+        RouterModule.forRoot(
+            routes,
+            { enableTracing: false }
+        )
+    ],
+    exports: [
+        RouterModule
+    ],
+    declarations: []
 })
 export class AppRoutingModule { }

@@ -1,13 +1,9 @@
 <nav>
-    <a id="logo">Narrator</a>
+    <a id="logo" routerLink="/">Narrator</a>
     <a routerLink="/narration/create">Create</a>
     <a routerLink="/narration/list">Narrations</a>
 </nav>
-<div class="container main-app-container">
-    <div class="row">
-        <div class="col-md-12">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
+<div class="container-fluid" style="padding-right: 0px;">
+   <router-outlet></router-outlet>
 </div>
 <footer>&copy; 2018 drive2code</footer>

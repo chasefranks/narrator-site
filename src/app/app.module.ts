@@ -15,6 +15,7 @@ import { NarrationListComponent } from './narration-list/narration-list.componen
 import { NarrationService } from './narration.service';
 import { LogService } from './log.service';
 import { HomeComponent } from './home/home.component';
+import { NarrationRecorderComponent } from './narration-recorder/narration-recorder.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HomeComponent } from './home/home.component';
     NarrationCreateComponent,
     NarrationComponent,
     NarrationListComponent,
-    HomeComponent
+    HomeComponent,
+    NarrationRecorderComponent
   ],
   imports: [
     BrowserModule,

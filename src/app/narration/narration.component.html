@@ -1,5 +1,5 @@
 <div *ngIf="narration" class="row">
-  <div class="col-md-8">
+  <div class="col-md-4">
     <div *ngIf="paused" class="alert alert-success">Narration paused</div>
     <h1>{{narration.name}}</h1>
   </div>
@@ -10,10 +10,13 @@
     <button *ngIf="!paused" (click)="pauseNarration()" type="button" class="button">Pause</button>
     <button *ngIf="paused" (click)="resumeNarration()" type="button" class="button">Resume</button>
   </div>
+  <div class="col-md-4">
+      <app-recorder [narration]="narration"></app-recorder>
+  </div>
 </div>
 <div *ngIf="narration">
   <div *ngFor="let section of narration.sections" class="row narration-section">
-    <div [@activeState]="section.activeState" class="col">
+    <div [@activeState]="section.activeState" class="col-md-8">
       <h2>
         {{section.name}}
       </h2>

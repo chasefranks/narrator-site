@@ -3,6 +3,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { Observable, Subject } from 'rxjs';
 
 import { Narration, Section } from '../model/narration-model';

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
 import { Narration } from '../model/narration-model';
 
 declare const MediaRecorder: any;
@@ -23,16 +25,24 @@ export class NarrationRecorderComponent implements OnInit {
     // holds bytes of the audio stream
     private chunks: any = [];
 
-    constructor( private zone: NgZone ) { }
+    constructor( private zone: NgZone, private modalService: NgbModal ) { }
 
     ngOnInit() {
     }
 
-    every(msecs: number): Observable<number> {
-        return Observable.interval(msecs);
+    closeResult: string;
+
+    private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+          return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+          return 'by clicking on a backdrop';
+        } else {
+          return  `with: ${reason}`;
+        }
     }
 
-    stop(): void { this.mediaRecorder.stop(); }
+    stop(): void { if (this.mediaRecorder) this.mediaRecorder.stop(); }
 
     pause(): void { this.mediaRecorder.pause(); }
 
@@ -95,12 +105,6 @@ export class NarrationRecorderComponent implements OnInit {
                         // stop all tracks
                         stream.getAudioTracks().forEach(track => track.stop());
 
-                        // assemble collected chunks
-                        const blob = new Blob(this.chunks, { type: 'audio/ogg; codecs=opus' });
-                        console.log(`uploading ${blob.size} bytes`);
-
-                        // TODO create recording and upload to /recordings/:id/audio
-
                     };
 
                     this.mediaRecorder.onpause = ( e ) => {
@@ -113,12 +117,34 @@ export class NarrationRecorderComponent implements OnInit {
 
                     this.mediaRecorder.start(3000); // every 3 seconds a Blob will be pushed
 
-                    // push data into chunks array every 3 seconds
-                    // this.every(3000).map((time: number) => {
-                    //     this.mediaRecorder.requestData();
-                    // }).subscribe();
-
                 });
+
+    }
+
+    openUploadModal(content: any): void {
+
+        if (this.chunks.length > 0) { // only display modal if content available
+            this.modalService.open(content).result
+                .then(
+                    (result) => {
+                        this.closeResult = `Closed with: ${result}`;
+
+                        // assemble collected chunks
+                        if (result == 'upload') {
+                            const blob = new Blob(this.chunks, { type: 'audio/ogg; codecs=opus' });
+                            console.log(`uploading ${blob.size} bytes`);
+                        } else {
+                            console.log('discarding');
+                        }
+
+                        // TODO create recording and upload to /recordings/:id/audio
+                    },
+                    (reason) => {
+                        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+                        this.chunks = [];
+                    }
+                );
+        }
 
     }
 

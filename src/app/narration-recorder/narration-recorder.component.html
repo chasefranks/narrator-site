@@ -1,0 +1,33 @@
+<div class="recorder-container">
+    <div id="recorder-left-panel">
+        <i class="fas fa-microphone fa-lg"></i>
+    </div>
+    <div id="recorder-main-panel">
+        <div>
+            <i *ngIf="!state || state ==='paused' || state === 'inactive'" class="fas fa-circle fa-lg" (click)="recordOrResume()"></i>
+            <i *ngIf="state === 'recording'" class="fas fa-pause-circle fa-lg" (click)="pause()"></i>
+        </div>
+        <div class="recorder-volume"><!--display volume meter here--></div>
+        <div class="recorder-main-status">
+            <span *ngIf="state && state !== 'inactive'">{{state}}</span>
+        </div>
+    </div>
+    <div id="recorder-right-panel">
+        <i class="fas fa-stop fa-lg" (click)="stop(); openUploadModal(content)"></i>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Upload Audio Recording</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h3>Upload?</h3>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="button" (click)="c('upload')" >Yes</button><button type="button" class="button" (click)="c('discard')">Discard</button>
+  </div>
+</ng-template>

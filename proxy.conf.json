@@ -1,6 +1,10 @@
 {
-  "/narrations": {
-    "target": "http://localhost:3000",
-    "secure": false
-  }
+    "/narrations": {
+        "target": "http://localhost:3000",
+        "secure": false
+    },
+    "/recordings": {
+        "target": "http://localhost:3000",
+        "secure": false
+    }
 }

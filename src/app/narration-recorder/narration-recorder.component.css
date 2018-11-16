@@ -1,0 +1,79 @@
+.recorder-container {
+    background-color: #3b3a30;
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow: auto;
+    height: auto;
+    padding: 0px;
+}
+
+#recorder-left-panel {
+    background-color: #3b3a30;
+    border-radius: 10px 0px 0px 10px;
+    border-right: solid 1px #ff33cc;
+    padding-left: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    float: left;
+    width: 15%;
+}
+
+#recorder-left-panel i {
+    color: #ff33cc;
+}
+
+#recorder-main-panel {
+    float: left;
+    color: #ff33cc;
+    width: 70%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    position: relative;
+}
+
+#recorder-main-panel i {
+    float: left;
+    color: black;
+}
+
+#recorder-main-panel i:hover {
+    color: #ff33cc;
+}
+
+.recorder-main-status {
+    font-size: 0.5em;
+    width: 100%;
+    position: absolute;
+    bottom: -4px;
+    left: 5px;
+    height: 10px;
+}
+
+.recorder-volume {
+    height: 15px;
+    width: 70%;
+    position: absolute;
+    left: 30px;
+}
+
+#recorder-right-panel {
+    background-color: #3b3a30;
+    border-radius: 0px 10px 10px 0px;
+    border-left: solid 1px #ff33cc;
+    padding: 0px;
+    float: left;
+    width: 15%;
+    padding-right: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+}
+
+#recorder-right-panel i {
+    color: black;
+}
+
+#recorder-right-panel i:hover {
+    color: #ff33cc;
+}

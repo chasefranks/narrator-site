@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NarrationCreateComponent } from '../narration-create/narration-create.component';
 import { NarrationComponent } from '../narration/narration.component';
 import { NarrationListComponent } from '../narration-list/narration-list.component';
+
 import { AppComponent } from '../app.component';
 import { HomeComponent } from "../home/home.component";
 

@@ -16,6 +16,7 @@ import { NarrationListComponent } from './narration-list/narration-list.componen
 
 import { NarrationService } from './narration.service';
 import { LogService } from './log.service';
+import { RecorderService } from './recorder.service';
 import { HomeComponent } from './home/home.component';
 import { NarrationRecorderComponent } from './narration-recorder/narration-recorder.component';
 
@@ -38,6 +39,7 @@ import { NarrationRecorderComponent } from './narration-recorder/narration-recor
   ],
   providers: [
     NarrationService,
+    RecorderService,
     LogService
   ],
   bootstrap: [AppComponent]

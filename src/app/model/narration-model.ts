@@ -27,7 +27,7 @@ export class Narration {
 
 export class Section {
 
-    public id;
+    public id: number;
 
     constructor(
         public name: string,
@@ -36,5 +36,16 @@ export class Section {
         public remaining: number = duration,
         public activeState: string = 'inactive'
     ) { }
+
+}
+
+export class Recording {
+
+    public id: string;
+
+    constructor(
+        public narration: string,
+        public hasAudio: boolean = false,
+    ) {}
 
 }

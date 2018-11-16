@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { Observable } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Narration } from '../model/narration-model';
+
+import { RecorderService } from '../recorder.service';
 
 declare const MediaRecorder: any;
 
@@ -25,22 +28,12 @@ export class NarrationRecorderComponent implements OnInit {
     // holds bytes of the audio stream
     private chunks: any = [];
 
-    constructor( private zone: NgZone, private modalService: NgbModal ) { }
+    constructor( private zone: NgZone, private modalService: NgbModal, private recorderService: RecorderService ) { }
 
     ngOnInit() {
     }
 
     closeResult: string;
-
-    private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-          return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-          return 'by clicking on a backdrop';
-        } else {
-          return  `with: ${reason}`;
-        }
-    }
 
     stop(): void { if (this.mediaRecorder) this.mediaRecorder.stop(); }
 
@@ -102,7 +95,7 @@ export class NarrationRecorderComponent implements OnInit {
 
                         this.zone.run(() => this.state = this.mediaRecorder.state);
 
-                        // stop all tracks
+                        // stop all tracks to release the mic
                         stream.getAudioTracks().forEach(track => track.stop());
 
                     };
@@ -131,18 +124,29 @@ export class NarrationRecorderComponent implements OnInit {
 
                         // assemble collected chunks
                         if (result == 'upload') {
-                            const blob = new Blob(this.chunks, { type: 'audio/ogg; codecs=opus' });
+                            // TODO the content type may not be audio/webm...see if we can get the content type from the constituent Blobs instead
+                            const blob = new Blob(this.chunks, { type: 'audio/webm;codecs=opus' });
                             console.log(`uploading ${blob.size} bytes`);
+
+                            // TODO refactor into own method
+                            this.recorderService
+                                .createRecording(this.narration.id)
+                                .pipe(
+                                    flatMap(recording => {
+                                        return this.recorderService.uploadAudio(blob, recording.id)
+                                    })
+                                ).subscribe(recording => {
+                                    if (recording.hasAudio) {
+                                        console.log('recording', recording.id, 'uploaded!');
+                                    }
+                                }, err => {console.log(err)});
+
                         } else {
                             console.log('discarding');
                         }
 
-                        // TODO create recording and upload to /recordings/:id/audio
                     },
-                    (reason) => {
-                        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-                        this.chunks = [];
-                    }
+                    (reason) => { this.chunks = []; } // blow chunks
                 );
         }
 
